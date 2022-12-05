@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+ 
+<script>
+$(document).ready(function(){
 
+ $("button").each(function( index ) {	  
+	var thisAsTitle = $(this).text();
+	$(this).prop('title', thisAsTitle );
+}); 
+ 
+window.speechSynthesis.getVoices();
+$("button").focus(function(){
+	speechSynthesis.cancel();
+	var getElementTitle = $(this).attr('title');   
+	var u = new SpeechSynthesisUtterance();
+	var voices = speechSynthesis.getVoices();
+	u.voice = voices[5];
+	u.voiceURI = 'native';
+	u.lang = 'en-GB';
+	u.rate = 1;
+	u.volume = 1;
+	u.pitch = 1;
+	u.text = getElementTitle;
+	
+	speechSynthesis.speak(u); 
+	
+});
+
+ 
+
+});
+</script>
+</head>
+<body>
+
+	 
+	<button title="">Button 2</button><br>
+	<button title="">Button 3</button><br>
+	<button title="">Button 4</button><br>
+	<button title="">Button 5</button><br>
+	<button title="">Button 6</button><br>
+	
+	<p id="voices"></p>
+ 
+</body>
+</html>
